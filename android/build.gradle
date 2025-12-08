@@ -15,7 +15,7 @@ buildscript {
     configurations.all {
         resolutionStrategy {
             // Forzamos la versión 21.0.1 para evitar el error de Class vs Interface
-            force 'com.google.android.gms:play-services-location:21.0.1'
+            // force 'com.google.android.gms:play-services-location:19.0.1'
         }
     }
     dependencies {
