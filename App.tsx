@@ -1,45 +1,54 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React from 'react';
+import { View } from 'react-native';
+import { ActivityIndicator, Text } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { useAuth } from './AuthContext';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+// Importamos las pantallas
+import LoginScreen from './LoginScreen';
+import AdminNavigator from './AdminNavigator';
+import SupervisorNavigator from './SupervisorNavigator';
+import OperadorNavigator from './OperadorNavigator';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+const AppContent = () => {
+  const { user, role, loading } = useAuth();
 
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  if (!user) {
+    return <LoginScreen />;
+  }
+
+  // Ruteo basado en roles
+  switch (role) {
+    case 'admin':
+      return <AdminNavigator />;
+    case 'supervisor':
+      return <SupervisorNavigator />;
+    case 'operador':
+      return <OperadorNavigator />;
+    default:
+      // Caso donde el usuario está autenticado pero no tiene rol o es desconocido
+      return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
+          <Text>Usuario sin rol asignado o rol desconocido.</Text>
+          <Text>UID: {user.uid}</Text>
+        </View>
+      );
+  }
+};
+
+export default function App() {
+  // El NavigationContainer debe envolver todo si usamos navegación interna en los roles
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+    <NavigationContainer>
       <AppContent />
-    </SafeAreaProvider>
+    </NavigationContainer>
   );
 }
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
-
-export default App;
