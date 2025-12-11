@@ -77,7 +77,17 @@ export default function AdminUsuariosScreen() {
 
         let secondaryApp = firebase.apps.find(app => app.name === 'SecondaryApp');
         if (!secondaryApp) {
-             secondaryApp = await firebase.initializeApp(firebase.app().options, 'SecondaryApp');
+             // Obtenemos las opciones de la app principal
+             const mainOptions = firebase.app().options;
+             
+             // Creamos opciones para la secundaria, AGREGANDO MANUALMENTE databaseURL
+             const secondaryOptions = {
+                 ...mainOptions,
+                 databaseURL: `https://comple-5c182.firebaseio.com` 
+             };
+             
+             console.log("Inicializando SecondaryApp con:", secondaryOptions); // Debug
+             secondaryApp = await firebase.initializeApp(secondaryOptions, 'SecondaryApp');
         }
         
         const userCred = await secondaryApp.auth().createUserWithEmailAndPassword(correo, password);

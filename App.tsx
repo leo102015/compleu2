@@ -4,7 +4,6 @@ import { ActivityIndicator, Text } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { useAuth } from './AuthContext';
 
-// Importamos las pantallas
 import LoginScreen from './LoginScreen';
 import AdminNavigator from './AdminNavigator';
 import SupervisorNavigator from './SupervisorNavigator';
@@ -25,7 +24,6 @@ const AppContent = () => {
     return <LoginScreen />;
   }
 
-  // Ruteo basado en roles
   switch (role) {
     case 'admin':
       return <AdminNavigator />;
@@ -34,7 +32,6 @@ const AppContent = () => {
     case 'operador':
       return <OperadorNavigator />;
     default:
-      // Caso donde el usuario está autenticado pero no tiene rol o es desconocido
       return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
           <Text>Usuario sin rol asignado o rol desconocido.</Text>
@@ -45,7 +42,6 @@ const AppContent = () => {
 };
 
 export default function App() {
-  // El NavigationContainer debe envolver todo si usamos navegación interna en los roles
   return (
     <NavigationContainer>
       <AppContent />

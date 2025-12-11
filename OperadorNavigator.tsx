@@ -5,6 +5,7 @@ import { useTheme } from 'react-native-paper';
 
 import OperadorObrasScreen from './OperadorObrasScreen';
 import OperadorPerfilScreen from './OperadorPerfilScreen'; // Placeholder simple
+import OperadorARScreen from './OperadorARScreen'; // Placeholder simple
 
 const Tab = createBottomTabNavigator();
 
@@ -29,6 +30,18 @@ export default function OperadorNavigator() {
           ),
         }}
       />
+
+      <Tab.Screen 
+        name="AR" 
+        component={OperadorARScreen} 
+        options={{
+          tabBarLabel: 'AR',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="view-in-ar" color={color} size={26} />
+          ),
+        }}
+      />
+
       <Tab.Screen 
         name="Perfil" 
         component={OperadorPerfilScreen} 
