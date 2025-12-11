@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="senal_semaforo" size="1.000000 1.000000" />
+    <ImageTarget name="senal_extintor" size="1.000000 1.000000" />
+    <ImageTarget name="senal_riesgo" size="1.000000 1.459854" />
+    <ImageTarget name="senal_reunion_" size="1.000000 1.002674" />
+  </Tracking>
+</QCARConfig>

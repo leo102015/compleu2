@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="prohibidofumar" size="1.000000 1.000000" />
+    <ImageTarget name="prohibido" size="1.000000 1.000000" />
+    <ImageTarget name="basura" size="1.000000 1.060071" />
+    <ImageTarget name="casco" size="1.000000 1.000000" />
+    <ImageTarget name="botas" size="1.000000 1.157143" />
+    <ImageTarget name="auditiva" size="1.000000 1.000000" />
+    <ImageTarget name="obra" size="1.000000 1.391720" />
+    <ImageTarget name="maquinaria" size="1.000000 1.000000" />
+    <ImageTarget name="caida" size="1.000000 1.000000" />
+  </Tracking>
+</QCARConfig>

@@ -1,28 +1,41 @@
 buildscript {
     ext {
-        buildToolsVersion = "36.0.0"
+        buildToolsVersion = "35.0.0"
         minSdkVersion = 24
-        compileSdkVersion = 36
-        targetSdkVersion = 36
+        compileSdkVersion = 35
+        targetSdkVersion = 34
         ndkVersion = "27.1.12297006"
-        kotlinVersion = "2.1.20"
-        googlePlayServicesAuthVersion = "19.2.0"
+        kotlinVersion = "2.0.21"
     }
     repositories {
         google()
         mavenCentral()
     }
-    configurations.all {
-        resolutionStrategy {
-            // Forzamos la versión 21.0.1 para evitar el error de Class vs Interface
-            // force 'com.google.android.gms:play-services-location:19.0.1'
-        }
-    }
     dependencies {
         classpath("com.android.tools.build:gradle")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
-        classpath('com.google.gms:google-services:4.4.2') // Agrega esta línea
+        classpath('com.google.gms:google-services:4.4.2')
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        flatDir {
+            dirs "${project(':unityLibrary').projectDir}/libs"
+        }
+    }
+
+    // --- SOLUCIÓN FINAL ---
+    // Al usar nombres planos, podemos identificar los proyectos fácilmente.
+    // Inyectamos la propiedad 'react' como un mapa en 'ext'.
+    if (project.name == 'unityLibrary' || project.name == 'unityXRManifest') {
+        project.ext.react = [
+            newArchEnabled: false,
+            hermesEnabled: false
+        ]
     }
 }
 

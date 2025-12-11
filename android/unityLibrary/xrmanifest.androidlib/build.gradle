@@ -1,0 +1,43 @@
+apply plugin: 'com.android.library'
+
+// --- CORRECCIÓN VITAL ---
+// Definimos esto aquí directamente para que el plugin de React Native
+// lo encuentre inmediatamente y deje de marcar error.
+ext {
+    react = [
+        newArchEnabled: false,
+        hermesEnabled: false
+    ]
+}
+// ------------------------
+
+dependencies {
+    implementation fileTree(dir: 'bin', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+android {
+    namespace "com.UnityTechnologies.XR.Manifest"
+    
+    // Usamos las versiones de tu proyecto raíz para evitar conflictos
+    compileSdk rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdk rootProject.ext.minSdkVersion
+        targetSdk rootProject.ext.targetSdkVersion
+    }
+
+    lint {
+        abortOnError false
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
